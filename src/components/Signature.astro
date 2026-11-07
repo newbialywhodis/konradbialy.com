@@ -1,0 +1,90 @@
+<svg
+  class="signature"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="8 12 290 80"
+  width="290"
+  height="80"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <!-- Open pen strokes, ordered in the direction of handwriting. -->
+  <path
+    pathLength="1"
+    style="--delay: 60ms; --duration: 170ms"
+    d="M 19,68 C 25,52 36,24 43,20 C 50,16 40,37 32,49 L 25,64"
+  />
+  <path
+    pathLength="1"
+    style="--delay: 230ms; --duration: 160ms"
+    d="M 29,49 C 40,43 55,30 62,24 C 58,33 43,43 33,47 C 46,44 41,69 54,62 L 58,58"
+  />
+  <path
+    pathLength="1"
+    style="--delay: 390ms; --duration: 500ms"
+    d="M 71,51 C 65,46 57,53 57,60 C 57,69 67,66 72,57 C 75,50 70,48 68,52 C 66,56 73,58 80,52
+       L 76,65 C 81,53 89,47 91,51 C 93,54 84,65 90,65 C 94,65 99,57 102,51
+       L 98,65 C 101,57 107,49 111,50 C 116,50 108,56 113,56 C 117,56 123,49 128,52
+       C 122,48 114,54 113,61 C 112,69 123,66 128,52 C 124,61 125,68 131,64
+       C 136,62 140,55 145,52 C 139,48 132,55 133,62 C 135,70 144,62 148,48
+       C 153,32 159,21 154,23 C 149,26 145,45 143,57 C 139,69 145,67 155,54"
+  />
+  <path
+    pathLength="1"
+    style="--delay: 960ms; --duration: 100ms"
+    d="M 183,68 C 189,53 196,34 202,24"
+  />
+  <path
+    pathLength="1"
+    style="--delay: 1060ms; --duration: 180ms"
+    d="M 184,35 C 196,22 224,22 220,34 C 217,43 202,47 193,47
+       C 204,42 224,44 219,55 C 215,66 195,71 187,63"
+  />
+  <path
+    pathLength="1"
+    style="--delay: 1240ms; --duration: 350ms"
+    d="M 228,52 C 226,57 222,66 227,65 C 230,65 230,60 231,56 C 235,56 241,49 246,52
+       C 240,48 232,54 231,61 C 230,69 241,66 246,52 C 242,61 243,68 249,64
+       C 255,61 268,34 268,26 C 268,17 257,39 253,53 C 249,65 252,68 258,63 L 266,53
+       C 262,61 262,67 267,65 C 272,63 279,53 280,51
+       C 275,66 268,88 261,87 C 253,85 274,71 289,63"
+  />
+  <path pathLength="1" style="--delay: 1600ms; --duration: 40ms" d="M 231,43 L 231.5,42" />
+  <path pathLength="1" style="--delay: 1640ms; --duration: 80ms" d="M 250,53 L 265,44" />
+</svg>
+
+<style>
+  .signature {
+    display: block;
+    width: 17rem;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* Keep the complete signature as the default, including reduced motion. */
+  @media (prefers-reduced-motion: no-preference) {
+    path {
+      stroke-dasharray: 1 1;
+      animation: write var(--duration) linear var(--delay) both;
+    }
+  }
+
+  @keyframes write {
+    from {
+      stroke-dashoffset: 1;
+      opacity: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+</style>

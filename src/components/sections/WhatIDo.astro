@@ -1,0 +1,67 @@
+---
+const areas = [
+  {
+    title: "Websites",
+    description: "Fast, accessible websites with a clear purpose and a considered design.",
+  },
+  {
+    title: "Interfaces",
+    description: "Responsive layouts and interactions that make the everyday feel easy.",
+  },
+  {
+    title: "Digital products",
+    description: "Turning an idea into working software, then making it better.",
+  },
+];
+---
+
+<section aria-labelledby="what-heading" id="what-i-do">
+  <h2 id="what-heading">What I do</h2>
+  <dl>
+    {areas.map(({ title, description }) => (
+      <div class="area">
+        <dt>{title}</dt>
+        <dd>{description}</dd>
+      </div>
+    ))}
+  </dl>
+</section>
+
+<style>
+  h2 {
+    margin-bottom: var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+  dl {
+    margin: 0;
+  }
+  .area {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: var(--space-5);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+  }
+  .area:first-child {
+    padding-top: 0;
+  }
+  .area:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+  dt {
+    font-weight: 500;
+  }
+  dd {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+  @media (max-width: 480px) {
+    .area {
+      grid-template-columns: 1fr;
+      gap: var(--space-1);
+    }
+  }
+</style>

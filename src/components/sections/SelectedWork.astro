@@ -1,0 +1,58 @@
+---
+import { selectedProject as project } from "../../content/site";
+import ArrowUpRight from "../ui/ArrowUpRight.astro";
+---
+
+<section aria-labelledby="work-heading" id="work">
+  <h2 id="work-heading">Selected work</h2>
+  <a class="project" href={project.url} aria-labelledby="project-name">
+    <div>
+      <h3 id="project-name">{project.name}</h3>
+      <p class="description">{project.description}</p>
+    </div>
+    <span class="project-arrow">
+      <ArrowUpRight />
+    </span>
+  </a>
+</section>
+
+<style>
+  h2 {
+    margin-bottom: var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: 500;
+  }
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-5);
+    margin-inline: calc(-1 * var(--space-3));
+    padding: var(--space-3);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+  }
+  h3 {
+    font-size: var(--text-base);
+    font-weight: 550;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+  }
+  .project-arrow {
+    display: flex;
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+  }
+  .description {
+    max-width: 34rem;
+    text-wrap: pretty;
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+  }
+  @media (hover: hover) {
+    .project:hover {
+      background: var(--color-surface);
+    }
+  }
+</style>

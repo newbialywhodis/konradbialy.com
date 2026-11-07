@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import About from "../components/sections/About.astro";
+import SelectedWork from "../components/sections/SelectedWork.astro";
+import WhatIDo from "../components/sections/WhatIDo.astro";
+import Contact from "../components/sections/Contact.astro";
+import LocalStatus from "../components/LocalStatus.astro";
+import { person } from "../content/site";
+---
+
+<BaseLayout title={person.name} description={person.description}>
+  <div class="page">
+    <main id="main" tabindex="-1">
+      <About />
+      <SelectedWork />
+      <WhatIDo />
+      <Contact />
+    </main>
+    <footer>
+      <span>
+        © {new Date().getFullYear()} {person.name}
+      </span>
+      <LocalStatus />
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  .page {
+    width: min(var(--content-width), calc(100% - var(--space-7)));
+    margin-inline: auto;
+  }
+  main {
+    display: grid;
+    gap: var(--space-8);
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+  main:focus {
+    outline: none;
+  }
+  footer {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: var(--space-2) var(--space-5);
+    padding-block: var(--space-5) var(--space-7);
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+  @media (max-width: 480px) {
+    footer {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    main {
+      gap: var(--space-7);
+      padding-top: var(--space-7);
+    }
+  }
+</style>
