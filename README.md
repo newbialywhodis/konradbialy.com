@@ -1,4 +1,4 @@
-# konradbialy.pl
+# konradbialy.com
 
 Prosta stronka z lekkim charakterkiem
 Wymagane Bun 1.4.4 i Node.js 24 LTS.
@@ -18,6 +18,26 @@ bun run build
 ```
 
 `bun run format` formatuje źródła. `build` sprawdza typy przed generowaniem statycznego `dist/`.
+
+## Deployment na Cloudflare Workers
+
+Projekt pozostaje Astro SSG. `wrangler.jsonc` publikuje `dist/` jako Workers Static Assets
+pod nazwą `konradbialy-com`, bez adaptera Cloudflare i bez skryptu backendowego Workera.
+Konfiguracja odpowiada [zaleceniom Cloudflare dla Static Assets](https://developers.cloudflare.com/workers/static-assets/binding/).
+
+```sh
+bun run build
+bunx wrangler deploy --dry-run
+bunx wrangler login
+bunx wrangler deploy
+```
+
+`--dry-run` sprawdza konfigurację bez publikowania. Przed deploymentem zawsze zbuduj `dist/`.
+W Cloudflare Workers Builds ustaw build command na `bun run build`, a deploy command na
+`bunx wrangler deploy` (instalacja zależności: `bun install --frozen-lockfile`).
+Po publikacji przypisz `konradbialy.com` w ustawieniach Workera: Settings → Domains & Routes → Add → Custom Domain.
+Domena musi być aktywną strefą na tym samym koncie Cloudflare.
+Adresy SEO (canonical, Open Graph, sitemap i robots.txt) wskazują `https://konradbialy.com`.
 
 `check` uruchamia `astro sync && tsc --noEmit --runExternalCode`.
 Oficjalny `@astrojs/ts-content-mapper` pozwala jednemu kompilatorowi sprawdzać
