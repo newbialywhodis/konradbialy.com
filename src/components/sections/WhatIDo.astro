@@ -31,8 +31,9 @@ const areas = [
                 <path class="mini-outline" d="M6 12.5h36" />
                 <path class="mini-detail" d="M10 9h1m3 0h1" />
                 <rect class="mini-accent-soft" x="10" y="17" width="11" height="12" rx="1.5" />
-                <path class="mini-ink" d="M26 19h10" />
-                <path class="mini-detail" d="M26 23h7m-7 4h9" />
+                <path class="mini-ink website-text-first" d="M26 19h10" />
+                <path class="mini-detail website-text-second" d="M26 23h7" />
+                <path class="mini-detail website-text-third" d="M26 27h9" />
               </>
             )}
             {illustration === "interface" && (
@@ -42,8 +43,8 @@ const areas = [
                 <rect class="mini-accent" x="27" y="8" width="8" height="5" rx="2.5" />
                 <circle class="mini-knob" cx="32.5" cy="10.5" r="1.5" />
                 <path class="mini-outline" d="M14 29.5h20" />
-                <path class="mini-accent-line" d="M14 29.5h8" />
-                <circle class="mini-control" cx="23" cy="29.5" r="2.5" />
+                <path class="mini-accent-line interface-fill" d="M14 29.5h8" />
+                <circle class="mini-control interface-thumb" cx="23" cy="29.5" r="2.5" />
                 <rect class="mini-control" x="27.5" y="18.5" width="6" height="5" rx="1.5" />
               </>
             )}
@@ -54,7 +55,11 @@ const areas = [
                 <path class="mini-outline" d="M14.5 10v26" />
                 <path class="mini-detail" d="M10.5 15v1m0 4v1m0 4v1" />
                 <rect class="mini-accent-soft" x="19" y="15" width="12" height="8" rx="1.5" />
-                <path class="mini-accent-line" d="m21.5 20 2.5-2 2 1 2.5-2" />
+                <path
+                  class="mini-accent-line product-chart"
+                  d="m21.5 20 2.5-2 2 1 2.5-2"
+                  pathLength="1"
+                />
                 <path class="mini-detail" d="M20 28h10m-10 4h6" />
               </>
             )}
@@ -141,6 +146,94 @@ const areas = [
   .mini-control {
     fill: var(--color-surface);
     stroke: var(--color-illustration-detail);
+  }
+  .interface-fill {
+    transform-origin: 14px 29.5px;
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .area:hover .website-text-first {
+      animation: text-first 1.5s ease-in-out;
+    }
+    .area:hover .website-text-second {
+      animation: text-second 1.5s ease-in-out;
+    }
+    .area:hover .website-text-third {
+      animation: text-third 1.5s ease-in-out;
+    }
+    .area:hover .interface-fill {
+      animation: slider-fill 1.5s ease-in-out;
+    }
+    .area:hover .interface-thumb {
+      animation: slider-thumb 1.5s ease-in-out;
+    }
+    .area:hover .product-chart {
+      stroke-dasharray: 1;
+      animation: draw-chart 1.2s var(--ease-out);
+    }
+  }
+  @keyframes text-first {
+    0%,
+    100% {
+      stroke: var(--color-text-muted);
+    }
+    35%,
+    75% {
+      stroke: var(--color-illustration-detail);
+    }
+  }
+  @keyframes text-second {
+    0%,
+    20%,
+    65%,
+    100% {
+      stroke: var(--color-illustration-detail);
+    }
+    40% {
+      stroke: var(--color-text-muted);
+    }
+  }
+  @keyframes text-third {
+    0%,
+    45%,
+    90%,
+    100% {
+      stroke: var(--color-illustration-detail);
+    }
+    65% {
+      stroke: var(--color-text-muted);
+    }
+  }
+  @keyframes slider-fill {
+    0%,
+    100% {
+      transform: scaleX(1);
+    }
+    35% {
+      transform: scaleX(2);
+    }
+    70% {
+      transform: scaleX(0.375);
+    }
+  }
+  @keyframes slider-thumb {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    35% {
+      transform: translateX(8px);
+    }
+    70% {
+      transform: translateX(-5px);
+    }
+  }
+  @keyframes draw-chart {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
   h3 {
     margin-bottom: var(--space-2);
