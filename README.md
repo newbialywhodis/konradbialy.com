@@ -37,7 +37,7 @@ W Cloudflare Workers Builds ustaw build command na `bun run build`, a deploy com
 `bunx wrangler deploy` (instalacja zależności: `bun install --frozen-lockfile`).
 Po publikacji przypisz `konradbialy.com` w ustawieniach Workera: Settings → Domains & Routes → Add → Custom Domain.
 Domena musi być aktywną strefą na tym samym koncie Cloudflare.
-Adresy SEO (canonical, Open Graph, sitemap i robots.txt) wskazują `https://konradbialy.com`.
+Adresy SEO (canonical, Open Graph, sitemap i robots.txt) korzystają z `site` w `astro.config.mjs`.
 
 `check` uruchamia `astro sync && tsc --noEmit --runExternalCode`.
 Oficjalny `@astrojs/ts-content-mapper` pozwala jednemu kompilatorowi sprawdzać
