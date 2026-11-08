@@ -48,24 +48,6 @@ const socialImageURL = new URL("/og-image.png", Astro.site);
     <meta name="twitter:image:alt" content={person.name} />
   </head>
   <body>
-    <a class="skip-link" href="#main">
-      Skip to content
-    </a>
     <slot />
   </body>
 </html>
-
-<style>
-  .skip-link {
-    position: absolute;
-    z-index: 1;
-    top: var(--space-4);
-    left: var(--space-4);
-    padding: var(--space-2) var(--space-4);
-    background: var(--color-background);
-    transform: translateY(-200%);
-  }
-  .skip-link:focus {
-    transform: translateY(0);
-  }
-</style>
