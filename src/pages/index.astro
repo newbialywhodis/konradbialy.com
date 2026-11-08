@@ -5,10 +5,10 @@ import SelectedWork from "../components/sections/SelectedWork.astro";
 import WhatIDo from "../components/sections/WhatIDo.astro";
 import Contact from "../components/sections/Contact.astro";
 import LocalStatus from "../components/LocalStatus.astro";
-import { person } from "../content/site";
+import { person, siteDescription } from "../content/site";
 ---
 
-<BaseLayout title={person.name} description={person.description}>
+<BaseLayout title={person.name} description={siteDescription}>
   <div class="page">
     <main id="main" tabindex="-1">
       <About />

@@ -7,6 +7,8 @@ export const person = {
     "I build websites and digital products with a focus on clarity, performance, and the small details.",
 };
 
+export const siteDescription = `${person.role} building websites and digital products.`;
+
 export const selectedProject = {
   name: "Lotja",
   url: "https://lotja.pl",
