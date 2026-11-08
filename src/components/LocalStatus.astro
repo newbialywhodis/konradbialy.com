@@ -1,5 +1,5 @@
 ---
-import { localContext } from "../content/site";
+import { localContext } from "../content/localContext";
 ---
 
 <p class="local-status" data-local-status>
@@ -17,7 +17,7 @@ import { localContext } from "../content/site";
 </p>
 
 <script>
-  import { localContext } from "../content/site";
+  import { localContext } from "../content/localContext";
 
   const status = document.querySelector<HTMLElement>("[data-local-status]");
   const clock = status?.querySelector<HTMLElement>("[data-clock]");

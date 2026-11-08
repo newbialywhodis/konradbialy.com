@@ -14,11 +14,3 @@ export const selectedProject = {
   url: "https://lotja.pl",
   description: "A modern e-commerce platform for creating and managing online stores.",
 };
-
-export const localContext = {
-  country: "Poland",
-  timeZone: "Europe/Warsaw",
-  // Koszalin city centre; no visitor geolocation is used.
-  latitude: 54.19438,
-  longitude: 16.17222,
-};

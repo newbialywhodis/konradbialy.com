@@ -52,6 +52,7 @@ Po wydaniu TS 7.1 zaktualizować zależność i ponownie wykonać kontrole.
 ## Treści i wygląd
 
 `src/content/site.ts` zawiera dane osobowe, kontakt i opis Lotji.
+`src/content/localContext.ts` zawiera lokalizację dla zegara i pogody.
 Każda sekcja ma osobny komponent w `src/components/sections/` i scoped CSS.
 Kolory, typografia i odstępy mają jedno źródło w `src/styles/tokens.css`.
 
