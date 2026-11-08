@@ -1,13 +1,17 @@
 :root {
   color-scheme: light;
-  --color-background: #fcfcfb;
-  --color-surface: #f3f3f0;
-  --color-text: #252522;
-  --color-text-muted: #696963;
+  --color-background: #fcfcfc;
+  --color-surface: #ffffff;
+  --color-text: #1f1f1f;
+  --color-text-muted: #5e5e5e;
   --color-border: #e7e7e2;
   --color-accent: #3e5e48;
   --color-accent-soft: #e9eee7;
   --color-focus: #42694f;
+  --color-illustration-background: #f3f3f2;
+  --color-illustration-border: #dededb;
+  --color-illustration-detail: #b3b5b1;
+  --shadow-illustration: 0 1px 1.5px rgb(0 0 0 / 7%);
   --font-body: "Inter", sans-serif;
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
