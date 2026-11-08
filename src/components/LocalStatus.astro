@@ -36,18 +36,24 @@ import { localContext } from "../content/localContext";
     const refreshInterval = 15 * 60 * 1000;
     const maxAge = 30 * 60 * 1000;
     const cacheKey = `local-weather:${localContext.latitude},${localContext.longitude}`;
-    type Reading = { temperature: number; observedAt: number };
+    type Reading = { temperature: number; observedAt: number; fetchedAt: number };
     let reading: Reading | undefined;
+    let lastAttemptAt = 0;
     let pending = false;
 
     function isFresh(value: unknown): value is Reading {
       if (!value || typeof value !== "object") return false;
-      if (!("temperature" in value) || !("observedAt" in value)) return false;
+      if (!("temperature" in value) || !("observedAt" in value) || !("fetchedAt" in value)) {
+        return false;
+      }
       return (
         typeof value.temperature === "number" &&
         Number.isFinite(value.temperature) &&
         typeof value.observedAt === "number" &&
         Number.isFinite(value.observedAt) &&
+        typeof value.fetchedAt === "number" &&
+        Number.isFinite(value.fetchedAt) &&
+        value.fetchedAt <= Date.now() &&
         Date.now() - value.observedAt >= 0 &&
         Date.now() - value.observedAt < maxAge
       );
@@ -80,8 +86,9 @@ import { localContext } from "../content/localContext";
     async function updateWeather() {
       renderWeather();
       if (pending || document.hidden) return;
-      if (isFresh(reading) && Date.now() - reading.observedAt < refreshInterval) return;
+      if (Date.now() - lastAttemptAt < refreshInterval) return;
       pending = true;
+      lastAttemptAt = Date.now();
       try {
         const url = new URL("https://api.open-meteo.com/v1/forecast");
         url.search = new URLSearchParams({
@@ -102,10 +109,10 @@ import { localContext } from "../content/localContext";
         const next: unknown = {
           temperature: data?.current?.temperature_2m,
           observedAt: data?.current?.time * 1000,
+          fetchedAt: lastAttemptAt,
         };
         if (!isFresh(next)) return;
         reading = next;
-        renderWeather();
         localStorage.setItem(cacheKey, JSON.stringify(reading));
       } catch {
         // Weather and browser storage are optional; the local clock still works.
@@ -117,7 +124,10 @@ import { localContext } from "../content/localContext";
 
     try {
       const cached: unknown = JSON.parse(localStorage.getItem(cacheKey) ?? "null");
-      if (isFresh(cached)) reading = cached;
+      if (isFresh(cached)) {
+        reading = cached;
+        lastAttemptAt = cached.fetchedAt;
+      }
     } catch {
       // Private browsing or a damaged cache should not prevent a fresh request.
     }

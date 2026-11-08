@@ -60,5 +60,6 @@ Font Inter jest serwowany lokalnie z `public/fonts/`.
 Strona nie ładuje zewnętrznych fontów, skryptów lub trackerów.
 Mały skrypt stopki wyświetla czas w `Europe/Warsaw` i temperaturę dla Koszalina (tutaj mieszkam) z Open-Meteo.
 Pogoda odświeża się co 15 minut w aktywnej karcie, z cache'em w localStorage.
+Czas pobrania ogranicza zapytania, a czas pomiaru decyduje o świeżości danych.
 Dane starsze niż 30 minut są ukrywane; przy błędzie API zostaje zegar, a bez JS - „in Poland”.
 Link na temperaturze zapewnia atrybucję Open-Meteo. Zapytania idą bezpośrednio z przeglądarki do API.
