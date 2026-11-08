@@ -1,14 +1,15 @@
 ---
 import { person } from "../../content/site";
-import Signature from "../Signature.astro";
 ---
 
 <section id="about" aria-labelledby="about-heading">
-  <h1 id="about-heading">
-    <span class="name">{person.name}</span>
-    <Signature />
-  </h1>
-  <p class="subtitle">{person.role}</p>
+  <header class="profile">
+    <img class="avatar" src="/avatar.png" alt="" width="40" height="40" decoding="async" />
+    <div>
+      <h1 id="about-heading">{person.name}</h1>
+      <p class="subtitle">{person.role}</p>
+    </div>
+  </header>
   <div class="intro">
     <p>{person.description}</p>
     <p>
@@ -19,35 +20,38 @@ import Signature from "../Signature.astro";
 </section>
 
 <style>
-  h1 {
-    margin-bottom: var(--space-2);
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
   }
-  .name {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
+  .avatar {
+    display: block;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    outline: 1px solid var(--color-avatar-border);
+    outline-offset: -1px;
+    object-fit: cover;
+  }
+  h1,
+  .subtitle {
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
   .subtitle {
+    margin-top: var(--space-1);
     color: var(--color-text-muted);
-    font-size: var(--text-lg);
-    font-weight: 550;
-    line-height: 1.3;
+    font-weight: 400;
   }
   .intro {
     max-width: 36rem;
     margin-top: var(--space-6);
   }
-  .intro p:first-child {
-    font-size: var(--text-lg);
-    line-height: 1.7;
-    letter-spacing: -0.02em;
-  }
   .intro p + p {
     margin-top: var(--space-4);
-    color: var(--color-text-muted);
   }
 </style>
