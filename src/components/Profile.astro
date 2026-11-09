@@ -3,14 +3,29 @@ import { person } from "../content/site";
 
 interface Props {
   headingId?: string;
+  greetingId?: string;
 }
 
-const { headingId } = Astro.props;
+const { headingId, greetingId } = Astro.props;
 const Name = headingId ? "h1" : "p";
+const Avatar = greetingId ? "button" : "span";
 ---
 
 <div class="profile">
-  <img class="avatar" src="/avatar.png" alt="" width="40" height="40" decoding="async" />
+  <Avatar
+    class="avatar-control"
+    type={greetingId ? "button" : undefined}
+    popovertarget={greetingId}
+    aria-label={greetingId ? "Say hi" : undefined}
+    data-avatar-trigger={greetingId ? "" : undefined}
+  >
+    <img class="avatar" src="/avatar.png" alt="" width="40" height="40" decoding="async" />
+  </Avatar>
+  {greetingId && (
+    <div class="greeting" id={greetingId} popover="auto" role="status" data-avatar-greeting>
+      Hi!
+    </div>
+  )}
   <div>
     <Name class="name" id={headingId}>
       {person.name}
@@ -19,11 +34,47 @@ const Name = headingId ? "h1" : "p";
   </div>
 </div>
 
+<script>
+  const greeting = document.querySelector<HTMLElement>("[data-avatar-greeting]");
+  const trigger = document.querySelector<HTMLButtonElement>("[data-avatar-trigger]");
+
+  if (greeting && trigger && !CSS.supports("position-area", "top")) {
+    // Only browsers without CSS anchor positioning need coordinates from JavaScript.
+    const positionGreeting = () => {
+      const { top, left, width } = trigger.getBoundingClientRect();
+      greeting.style.setProperty("--avatar-top", `${top}px`);
+      greeting.style.setProperty("--avatar-center", `${left + width / 2}px`);
+    };
+
+    greeting.addEventListener("beforetoggle", (event) => {
+      if (event.newState === "open") {
+        positionGreeting();
+        window.addEventListener("resize", positionGreeting);
+        window.addEventListener("scroll", positionGreeting, { passive: true, capture: true });
+      } else {
+        window.removeEventListener("resize", positionGreeting);
+        window.removeEventListener("scroll", positionGreeting, true);
+      }
+    });
+  }
+</script>
+
 <style>
   .profile {
     display: flex;
     align-items: center;
     gap: var(--space-4);
+  }
+  .avatar-control {
+    display: block;
+    flex-shrink: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+  }
+  button.avatar-control {
+    cursor: pointer;
   }
   .avatar {
     display: block;
@@ -34,6 +85,49 @@ const Name = headingId ? "h1" : "p";
     outline: 1px solid var(--color-avatar-border);
     outline-offset: -1px;
     object-fit: cover;
+  }
+  .greeting {
+    position: fixed;
+    inset: auto;
+    top: calc(var(--avatar-top, 50vh) - var(--space-2));
+    left: var(--avatar-center, 50vw);
+    width: max-content;
+    max-width: calc(100vw - var(--space-7));
+    margin: 0;
+    padding: var(--space-2) var(--space-3);
+    border: 0;
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    box-shadow: var(--shadow-card-hover);
+    font-size: var(--text-sm);
+    line-height: 1.4;
+    translate: -50% -100%;
+  }
+  @supports (position-area: top) {
+    .greeting {
+      position-anchor: auto;
+      inset: auto;
+      position-area: top;
+      position-try-fallbacks: flip-block;
+      margin-block-end: var(--space-2);
+      translate: none;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .greeting:popover-open {
+      animation: greeting-in var(--duration-fast) var(--ease-out);
+    }
+    @keyframes greeting-in {
+      from {
+        opacity: 0;
+        transform: translateY(var(--space-1));
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
   .name,
   .subtitle {
