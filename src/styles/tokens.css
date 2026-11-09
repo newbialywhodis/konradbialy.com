@@ -10,6 +10,9 @@
   --color-accent: #3e5e48;
   --color-accent-soft: #e9eee7;
   --color-focus: #42694f;
+  --color-code-background: #f7f7f7;
+  --color-code-header-background: #fafafa;
+  --color-code-border: #ebebeb;
   --color-illustration-background: #f3f3f2;
   --color-illustration-border: #dededb;
   --color-illustration-detail: #b3b5b1;
@@ -18,6 +21,7 @@
   --shadow-card-hover:
     var(--shadow-card), 0 8px 20px color-mix(in srgb, var(--color-foreground) 5%, transparent);
   --font-body: "Inter", sans-serif;
+  --font-code: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   --text-xs: 0.75rem;
   --text-sm: 0.8125rem;
   --text-base: 0.9375rem;
@@ -34,6 +38,7 @@
   --profile-content-gap: var(--space-6);
   --radius-sm: 0.375rem;
   --radius-md: 0.75rem;
+  --radius-code: 0.5rem;
   --duration-fast: 160ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }

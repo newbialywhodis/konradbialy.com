@@ -9,7 +9,7 @@
     "lint": "oxlint --deny-warnings .",
     "format": "node node_modules/oxfmt/bin/oxfmt --write .",
     "format:check": "node node_modules/oxfmt/bin/oxfmt --check .",
-    "check": "astro sync && tsc --noEmit --runExternalCode"
+    "check": "astro sync --force && tsc --noEmit --runExternalCode"
   },
   "dependencies": {
     "astro": "^7.4.7"

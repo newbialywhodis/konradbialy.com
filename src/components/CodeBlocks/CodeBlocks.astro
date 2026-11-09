@@ -1,0 +1,152 @@
+<div class="code-blocks">
+  <slot />
+</div>
+
+<script>
+  if (navigator.clipboard?.writeText) {
+    document.querySelectorAll<HTMLButtonElement>("[data-copy-code]").forEach((button) => {
+      const block = button.closest(".code-block");
+      const code = block?.querySelector("pre code");
+      const status = block?.querySelector<HTMLElement>("[role='status']");
+      if (!code || !status) return;
+
+      button.hidden = false;
+      const label = button.getAttribute("aria-label") ?? "Copy code";
+      let resetTimer: ReturnType<typeof setTimeout>;
+
+      button.addEventListener("click", async () => {
+        clearTimeout(resetTimer);
+        button.disabled = true;
+        try {
+          await navigator.clipboard.writeText(code.textContent ?? "");
+          button.dataset.state = "copied";
+          status.textContent = "Copied!";
+          button.title = "Copied!";
+        } catch {
+          button.dataset.state = "error";
+          status.textContent = "Couldn't copy. Select the code to copy it manually.";
+          button.title = status.textContent;
+        } finally {
+          button.setAttribute("aria-label", status.textContent ?? label);
+          button.disabled = false;
+          resetTimer = setTimeout(() => {
+            delete button.dataset.state;
+            status.textContent = "";
+            button.title = "Copy code";
+            button.setAttribute("aria-label", label);
+          }, 3000);
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .code-blocks {
+    min-width: 0;
+  }
+  .code-blocks :global(.code-block) {
+    margin-inline: 0;
+    margin-block-end: 0;
+    border: 1px solid var(--color-code-border);
+    border-radius: var(--radius-code);
+    background: var(--color-surface);
+  }
+  .code-blocks :global(.code-block-header) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 2.5rem;
+    padding-inline: var(--space-4) var(--space-1);
+    border-bottom: 1px solid var(--color-code-border);
+    border-radius: var(--radius-code) var(--radius-code) 0 0;
+    background: var(--color-code-header-background);
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.25;
+  }
+  .code-blocks :global(.code-block-file) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+    margin-inline-end: auto;
+  }
+  .code-blocks :global(.code-block-language) {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: var(--space-4);
+    height: var(--space-4);
+  }
+  .code-blocks :global(.code-block-filename) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .code-blocks :global(.code-block-status) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .code-blocks :global(.code-block-copy) {
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .code-blocks :global(.code-block-copy:not([hidden])) {
+    display: inline-flex;
+  }
+  .code-blocks :global(.code-block-copy:hover) {
+    background: var(--color-code-border);
+  }
+  .code-blocks :global(.code-block-copy:focus-visible) {
+    outline-offset: -4px;
+  }
+  .code-blocks :global(.code-block-copy svg) {
+    width: var(--space-4);
+    height: var(--space-4);
+  }
+  .code-blocks :global(.copy-check),
+  .code-blocks :global(.copy-error),
+  .code-blocks :global([data-state] .copy-icon) {
+    display: none;
+  }
+  .code-blocks :global([data-state="copied"] .copy-check),
+  .code-blocks :global([data-state="error"] .copy-error) {
+    display: block;
+  }
+  .code-blocks :global(.code-block pre) {
+    max-width: 100%;
+    margin: 0;
+    padding: var(--space-4) 1.25rem;
+    border-radius: 0 0 var(--radius-code) var(--radius-code);
+    font-family: var(--font-code);
+    font-size: var(--text-sm);
+    line-height: 1.54;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+  }
+  .code-blocks :global(.code-block pre code) {
+    font: inherit;
+  }
+  .code-blocks :global(.code-block pre:focus-visible) {
+    outline-offset: -3px;
+  }
+  @media (max-width: 480px) {
+    .code-blocks :global(.code-block pre) {
+      padding: var(--space-4);
+    }
+  }
+</style>
