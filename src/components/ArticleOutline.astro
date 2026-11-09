@@ -1,0 +1,57 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const headings = Astro.props.headings.filter((heading) => heading.depth === 2);
+---
+
+{headings.length > 1 && (
+  <details>
+    <summary>On this page</summary>
+    <nav aria-label="Table of contents">
+      <ol>
+        {headings.map((heading) => (
+          <li>
+            <a href={`#${heading.slug}`}>{heading.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </details>
+)}
+
+<style>
+  details {
+    padding-block: var(--space-4);
+    border-block: 1px solid var(--color-border);
+    font-size: var(--text-sm);
+  }
+  summary {
+    width: fit-content;
+    padding-block: var(--space-1);
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+  ol {
+    display: grid;
+    gap: var(--space-2);
+    margin-block: var(--space-4) var(--space-1);
+    padding-inline-start: var(--space-5);
+  }
+  li {
+    padding-inline-start: var(--space-1);
+  }
+  li::marker {
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+  }
+  a {
+    text-decoration-color: var(--color-border);
+  }
+  a:hover {
+    text-decoration-color: currentColor;
+  }
+</style>

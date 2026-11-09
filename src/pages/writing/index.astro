@@ -1,0 +1,32 @@
+---
+import WritingLayout from "../../layouts/WritingLayout.astro";
+import EssayList from "../../components/EssayList.astro";
+import { getEssays } from "../../content/essays";
+import { person, writingDescription } from "../../content/site";
+
+const essays = await getEssays();
+---
+
+<WritingLayout title={`Writing - ${person.name}`} description={writingDescription}>
+  <header>
+    <h1>Writing</h1>
+    <p>{writingDescription}</p>
+  </header>
+  <EssayList essays={essays} headingLevel={2} />
+</WritingLayout>
+
+<style>
+  header {
+    margin-bottom: var(--space-6);
+  }
+  h1 {
+    font-size: var(--text-article-title);
+    font-weight: 550;
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+  }
+  p {
+    margin-top: var(--space-4);
+    color: var(--color-text-muted);
+  }
+</style>

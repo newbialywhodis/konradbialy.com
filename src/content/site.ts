@@ -8,6 +8,7 @@ export const person = {
 };
 
 export const siteDescription = `${person.role} building websites and digital products.`;
+export const writingDescription = "Notes and essays on code, design, and building for the web.";
 
 export const selectedProject = {
   name: "Lotja",

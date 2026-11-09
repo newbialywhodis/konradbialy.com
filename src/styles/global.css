@@ -22,6 +22,7 @@
 }
 
 html {
+  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: var(--space-6);
   -webkit-text-size-adjust: 100%;
@@ -61,6 +62,16 @@ a {
 ::selection {
   background: var(--color-accent-soft);
   color: var(--color-accent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(root) {
+    animation-duration: var(--duration-page);
+    animation-timing-function: var(--ease-out);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html {
