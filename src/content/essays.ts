@@ -13,6 +13,10 @@ export function essayHref(essay: Essay) {
   return `/writing/${essay.id}/`;
 }
 
+export function essayImageHref(essay: Essay) {
+  return `/og/writing/${essay.id}.png`;
+}
+
 export function readingMinutes(essay: Essay) {
   const words = essay.body?.match(/\S+/gu)?.length ?? 0;
   return Math.max(1, Math.ceil(words / 220));

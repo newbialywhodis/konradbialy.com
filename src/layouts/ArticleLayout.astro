@@ -3,7 +3,7 @@ import type { MarkdownHeading } from "astro";
 import WritingLayout from "./WritingLayout.astro";
 import ArticleOutline from "../components/ArticleOutline.astro";
 import CodeBlocks from "../components/CodeBlocks/CodeBlocks.astro";
-import { essayDate, readingMinutes, type Essay } from "../content/essays";
+import { essayDate, essayImageHref, readingMinutes, type Essay } from "../content/essays";
 import { person } from "../content/site";
 
 interface Props {
@@ -33,6 +33,8 @@ const structuredData = {
   title={`${title} - ${person.name}`}
   description={description}
   publishedAt={date}
+  socialImage={essayImageHref(essay)}
+  socialImageAlt={title}
 >
   <script
     slot="head"

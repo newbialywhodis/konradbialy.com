@@ -12,7 +12,8 @@
     "check": "astro sync --force && tsc --noEmit --runExternalCode"
   },
   "dependencies": {
-    "astro": "^7.4.7"
+    "astro": "^7.4.7",
+    "astro-og-canvas": "^0.13.3"
   },
   "devDependencies": {
     "@astrojs/compiler-rs": "^0.5.2",
