@@ -1,14 +1,11 @@
 ---
+import Profile from "../Profile.astro";
 import { person } from "../../content/site";
 ---
 
 <section id="about" aria-labelledby="about-heading">
-  <header class="profile">
-    <img class="avatar" src="/avatar.png" alt="" width="40" height="40" decoding="async" />
-    <div>
-      <h1 id="about-heading">{person.name}</h1>
-      <p class="subtitle">{person.role}</p>
-    </div>
+  <header>
+    <Profile headingId="about-heading" />
   </header>
   <div class="intro">
     <p>{person.description}</p>
@@ -20,36 +17,9 @@ import { person } from "../../content/site";
 </section>
 
 <style>
-  .profile {
-    display: flex;
-    align-items: center;
-    gap: var(--space-4);
-  }
-  .avatar {
-    display: block;
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    outline: 1px solid var(--color-avatar-border);
-    outline-offset: -1px;
-    object-fit: cover;
-  }
-  h1,
-  .subtitle {
-    font-size: var(--text-base);
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-  }
-  .subtitle {
-    margin-top: var(--space-1);
-    color: var(--color-text-muted);
-    font-weight: 400;
-  }
   .intro {
     max-width: 36rem;
-    margin-top: var(--space-6);
+    margin-top: var(--profile-content-gap);
   }
   .intro p + p {
     margin-top: var(--space-4);

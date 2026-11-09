@@ -1,0 +1,16 @@
+<div class="page">
+  <slot />
+</div>
+
+<style>
+  .page {
+    width: min(var(--content-width), calc(100% - var(--space-7)));
+    margin-inline: auto;
+    padding-block-start: var(--space-8);
+  }
+  @media (max-width: 480px) {
+    .page {
+      padding-block-start: var(--space-7);
+    }
+  }
+</style>

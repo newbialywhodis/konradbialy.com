@@ -1,0 +1,50 @@
+---
+import { person } from "../content/site";
+
+interface Props {
+  headingId?: string;
+}
+
+const { headingId } = Astro.props;
+const Name = headingId ? "h1" : "p";
+---
+
+<div class="profile">
+  <img class="avatar" src="/avatar.png" alt="" width="40" height="40" decoding="async" />
+  <div>
+    <Name class="name" id={headingId}>
+      {person.name}
+    </Name>
+    <p class="subtitle">{person.role}</p>
+  </div>
+</div>
+
+<style>
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .avatar {
+    display: block;
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    outline: 1px solid var(--color-avatar-border);
+    outline-offset: -1px;
+    object-fit: cover;
+  }
+  .name,
+  .subtitle {
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .subtitle {
+    margin-top: var(--space-1);
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+</style>

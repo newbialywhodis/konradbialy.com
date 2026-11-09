@@ -1,0 +1,42 @@
+---
+interface Props {
+  href?: string;
+}
+
+const { href } = Astro.props;
+const Element = href ? "a" : "div";
+---
+
+<Element class="card" href={href} data-illustration-card>
+  <slot />
+</Element>
+
+<style>
+  .card {
+    display: block;
+    height: 100%;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+  }
+  a.card:focus-visible {
+    box-shadow: var(--shadow-card-hover);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    a.card:hover {
+      box-shadow: var(--shadow-card-hover);
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    a.card {
+      transition:
+        box-shadow var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+    }
+    a.card:active {
+      transform: scale(0.99);
+    }
+  }
+</style>

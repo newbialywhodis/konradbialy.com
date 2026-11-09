@@ -1,0 +1,256 @@
+---
+import type { IllustrationName } from "./illustrations";
+
+interface Props {
+  name: IllustrationName;
+}
+
+const { name } = Astro.props;
+---
+
+<div class="illustration" aria-hidden="true">
+  <svg width="48" height="40" viewBox="0 0 48 40" fill="none" focusable="false">
+    {name === "website" && (
+      <>
+        <rect class="mini-surface" x="5.5" y="5.5" width="37" height="29" rx="3" />
+        <path class="mini-outline" d="M6 12.5h36" />
+        <path class="mini-detail" d="M10 9h1m3 0h1" />
+        <rect class="mini-accent-soft" x="10" y="17" width="11" height="12" rx="1.5" />
+        <path class="mini-ink website-text-first" d="M26 19h10" />
+        <path class="mini-detail website-text-second" d="M26 23h7" />
+        <path class="mini-detail website-text-third" d="M26 27h9" />
+      </>
+    )}
+    {name === "interface" && (
+      <>
+        <rect class="mini-surface" x="8.5" y="3.5" width="31" height="33" rx="3" />
+        <path class="mini-detail" d="M14 11h7m-7 10h5" />
+        <rect class="mini-accent" x="27" y="8" width="8" height="5" rx="2.5" />
+        <circle class="mini-knob" cx="32.5" cy="10.5" r="1.5" />
+        <path class="mini-outline" d="M14 29.5h20" />
+        <path class="mini-accent-line interface-fill" d="M14 29.5h8" />
+        <circle class="mini-control interface-thumb" cx="23" cy="29.5" r="2.5" />
+        <rect class="mini-control" x="27.5" y="18.5" width="6" height="5" rx="1.5" />
+      </>
+    )}
+    {name === "product" && (
+      <>
+        <rect class="mini-back" x="11.5" y="3.5" width="30" height="27" rx="3" />
+        <rect class="mini-surface" x="6.5" y="9.5" width="30" height="27" rx="3" />
+        <path class="mini-outline" d="M14.5 10v26" />
+        <path class="mini-detail" d="M10.5 15v1m0 4v1m0 4v1" />
+        <rect class="mini-accent-soft" x="19" y="15" width="12" height="8" rx="1.5" />
+        <path class="mini-accent-line product-chart" d="m21.5 20 2.5-2 2 1 2.5-2" pathLength="1" />
+        <path class="mini-detail" d="M20 28h10m-10 4h6" />
+      </>
+    )}
+
+    {name === "styling" && (
+      <>
+        <rect class="mini-surface" x="3.5" y="4.5" width="41" height="31" rx="3" />
+        <path class="mini-outline" d="M4 11.5h40m-19.5 0v24" />
+        <path class="mini-detail" d="M8 8h1m3 0h1" />
+        <rect
+          class="mini-accent-soft styling-panel"
+          x="26.5"
+          y="13.5"
+          width="15"
+          height="19"
+          rx="1.5"
+        />
+        <path class="mini-ink styling-symbol" d="m12 17-3 3 3 3m4-6 3 3-3 3" />
+        <path class="mini-detail" d="M9 27h11M9 31h7" />
+        <path
+          class="mini-accent-line"
+          d="M32 16.5h-.5q-1 0-1 1v1q0 1.5-1.5 1.5 1.5 0 1.5 1.5v1q0 1 1 1h.5m4-7h.5q1 0 1 1v1q0 1.5 1.5 1.5-1.5 0-1.5 1.5v1q0 1-1 1H36"
+        />
+        <path class="mini-accent-line styling-line" d="M29.5 27h9" pathLength="1" />
+        <path
+          class="mini-accent-line styling-line styling-line-second"
+          d="M29.5 30h6"
+          pathLength="1"
+        />
+      </>
+    )}
+  </svg>
+</div>
+
+<style>
+  .illustration {
+    display: grid;
+    place-items: center;
+    width: 72px;
+    height: 54px;
+    border-radius: var(--radius-sm);
+    background: var(--color-illustration-background);
+  }
+  svg {
+    overflow: visible;
+  }
+  .mini-surface {
+    fill: var(--color-surface);
+    stroke: var(--color-illustration-border);
+    filter: drop-shadow(var(--shadow-illustration));
+  }
+  .mini-back {
+    fill: var(--color-illustration-background);
+    stroke: var(--color-illustration-border);
+  }
+  .mini-outline {
+    stroke: var(--color-illustration-border);
+  }
+  .mini-detail,
+  .mini-ink,
+  .mini-accent-line {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+  .mini-detail {
+    stroke: var(--color-illustration-detail);
+  }
+  .mini-ink {
+    stroke: var(--color-text-muted);
+  }
+  .mini-accent-soft {
+    fill: var(--color-accent-soft);
+  }
+  .mini-accent {
+    fill: var(--color-accent);
+  }
+  .mini-accent-line {
+    stroke: var(--color-accent);
+    stroke-width: 1.5;
+  }
+  .mini-knob {
+    fill: var(--color-surface);
+  }
+  .mini-control {
+    fill: var(--color-surface);
+    stroke: var(--color-illustration-detail);
+  }
+  .interface-fill {
+    transform-origin: 14px 29.5px;
+  }
+  .styling-symbol {
+    stroke-width: 1.5;
+  }
+  .styling-panel {
+    opacity: 0.5;
+  }
+  .styling-line {
+    stroke-dasharray: 1;
+  }
+  :global([data-illustration-card]:focus-visible) .styling-panel {
+    opacity: 1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    :global([data-illustration-card]:hover) .styling-panel {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .styling-panel {
+      transition: opacity var(--duration-fast) var(--ease-out);
+    }
+    :global([data-illustration-card]:focus-visible) .styling-line {
+      animation: draw-stroke 400ms var(--ease-out) backwards;
+    }
+    :global([data-illustration-card]:focus-visible) .styling-line-second {
+      animation-delay: 200ms;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      :global([data-illustration-card]:hover) .styling-line {
+        animation: draw-stroke 400ms var(--ease-out) backwards;
+      }
+      :global([data-illustration-card]:hover) .styling-line-second {
+        animation-delay: 200ms;
+      }
+    }
+  }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .website-text-first {
+      animation: text-first 1.5s ease-in-out;
+    }
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .website-text-second {
+      animation: text-second 1.5s ease-in-out;
+    }
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .website-text-third {
+      animation: text-third 1.5s ease-in-out;
+    }
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .interface-fill {
+      animation: slider-fill 1.5s ease-in-out;
+    }
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .interface-thumb {
+      animation: slider-thumb 1.5s ease-in-out;
+    }
+    :global([data-illustration-card]:is(:hover, :focus-visible)) .product-chart {
+      stroke-dasharray: 1;
+      animation: draw-stroke 1.2s var(--ease-out);
+    }
+  }
+  @keyframes text-first {
+    0%,
+    100% {
+      stroke: var(--color-text-muted);
+    }
+    35%,
+    75% {
+      stroke: var(--color-illustration-detail);
+    }
+  }
+  @keyframes text-second {
+    0%,
+    20%,
+    65%,
+    100% {
+      stroke: var(--color-illustration-detail);
+    }
+    40% {
+      stroke: var(--color-text-muted);
+    }
+  }
+  @keyframes text-third {
+    0%,
+    45%,
+    90%,
+    100% {
+      stroke: var(--color-illustration-detail);
+    }
+    65% {
+      stroke: var(--color-text-muted);
+    }
+  }
+  @keyframes slider-fill {
+    0%,
+    100% {
+      transform: scaleX(1);
+    }
+    35% {
+      transform: scaleX(2);
+    }
+    70% {
+      transform: scaleX(0.375);
+    }
+  }
+  @keyframes slider-thumb {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    35% {
+      transform: translateX(8px);
+    }
+    70% {
+      transform: translateX(-5px);
+    }
+  }
+  @keyframes draw-stroke {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
