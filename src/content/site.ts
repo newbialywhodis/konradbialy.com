@@ -10,8 +10,15 @@ export const person = {
 export const siteDescription = `${person.role} building websites and digital products.`;
 export const writingDescription = "Notes and essays on code, design, and building for the web.";
 
-export const selectedProject = {
-  name: "Lotja",
-  url: "https://lotja.pl",
-  description: "A modern e-commerce platform for creating and managing online stores.",
-};
+export const selectedProjects = [
+  {
+    name: "Lotja",
+    url: "https://lotja.pl",
+    description: "A modern e-commerce platform for creating and managing online stores.",
+  },
+  {
+    name: "Hearlier",
+    url: "https://github.com/newbialywhodis/hearlier",
+    description: "A Windows 11 app that lets you save recent system and microphone audio.",
+  },
+];

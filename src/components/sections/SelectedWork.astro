@@ -1,19 +1,21 @@
 ---
-import { selectedProject as project } from "../../content/site";
+import { selectedProjects } from "../../content/site";
 import ArrowUpRight from "../ui/ArrowUpRight.astro";
 ---
 
 <section aria-labelledby="work-heading" id="work">
   <h2 id="work-heading">Selected work</h2>
-  <a class="project" href={project.url}>
-    <div>
-      <h3>{project.name}</h3>
-      <p class="description">{project.description}</p>
-    </div>
-    <span class="project-arrow">
-      <ArrowUpRight />
-    </span>
-  </a>
+  {selectedProjects.map((project) => (
+    <a class="project" href={project.url}>
+      <div>
+        <h3>{project.name}</h3>
+        <p class="description">{project.description}</p>
+      </div>
+      <span class="project-arrow">
+        <ArrowUpRight />
+      </span>
+    </a>
+  ))}
 </section>
 
 <style>
