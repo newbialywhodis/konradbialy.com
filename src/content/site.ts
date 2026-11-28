@@ -17,8 +17,8 @@ export const selectedProjects = [
     description: "A modern e-commerce platform for creating and managing online stores.",
   },
   {
-    name: "Hearlier",
-    url: "https://github.com/newbialywhodis/hearlier",
+    name: "Sonago",
+    url: "https://github.com/newbialywhodis/sonago",
     description: "A Windows 11 app that lets you save recent system and microphone audio.",
   },
 ];
